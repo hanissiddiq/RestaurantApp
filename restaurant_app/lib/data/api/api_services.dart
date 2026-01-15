@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 class ApiServices {
   // todo-02-api-04: add base url for api
   // static const String _baseUrl = "https://tourism-api.dicoding.dev";
-  static const String _baseUrl = "https://restaurant-api.dicoding.dev/";
+  static const String _baseUrl = "https://restaurant-api.dicoding.dev";
 
   // todo-02-api-05: create an end-point to get a list of tourism
   Future<RestaurantListResponse> getRestaurantList() async {
@@ -23,7 +23,7 @@ class ApiServices {
   }
 
   // todo-04-detail-03: add end-point to get a detail of Restaurant place
-  Future<RestaurantDetailResponse> getRestaurantDetail(int id) async {
+  Future<RestaurantDetailResponse> getRestaurantDetail(String id) async {
     final response = await http.get(Uri.parse("$_baseUrl/detail/$id"));
 
     if (response.statusCode == 200) {

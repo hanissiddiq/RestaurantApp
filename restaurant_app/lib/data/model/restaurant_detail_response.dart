@@ -5,12 +5,12 @@ import 'package:restaurant_app/data/model/restaurant.dart';
 class RestaurantDetailResponse {
   final bool error;
   final String message;
-  final Restaurant place;
+  final Restaurant restaurant;
 
   RestaurantDetailResponse({
     required this.error,
     required this.message,
-    required this.place,
+    required this.restaurant,
   });
 
   // todo-04-detail-02: dont forget to add map converter
@@ -18,7 +18,7 @@ class RestaurantDetailResponse {
     return RestaurantDetailResponse(
       error: json["error"],
       message: json["message"],
-      place: Restaurant.fromJson(json["place"]),
+      restaurant: Restaurant.fromJson(json["restaurant"]),
     );
   }
 }

@@ -1,22 +1,19 @@
 class Restaurant {
-  final int id;
+  final String id;
   final String name;
   final String description;
-  final String address;
-  final double longitude;
-  final double latitude;
-  final int like;
-  final String image;
+  final String pictureId;
+  final String city;
+  final double rating;
+
 
   Restaurant({
     required this.id,
     required this.name,
     required this.description,
-    required this.address,
-    required this.longitude,
-    required this.latitude,
-    required this.like,
-    required this.image,
+    required this.pictureId,
+    required this.city,
+    required this.rating,    
   });
 
   // todo-01-setup-01: create a factory constructor to convert json to object class
@@ -25,11 +22,10 @@ class Restaurant {
       id: json["id"],
       name: json["name"],
       description: json["description"],
-      address: json["address"],
-      longitude: json["longitude"],
-      latitude: json["latitude"],
-      like: json["like"],
-      image: json["image"],
+      pictureId: json["pictureId"],
+      city: json["city"],
+      rating: json["rating"],
+      
     );
   }
 }

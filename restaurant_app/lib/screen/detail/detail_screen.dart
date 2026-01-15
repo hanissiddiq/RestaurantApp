@@ -12,7 +12,7 @@ import 'package:restaurant_app/screen/detail/bookmark_icon_widget.dart';
 // todo-04-detail-05: make this widget StatefulWidget
 class DetailScreen extends StatefulWidget {
   // todo-04-detail-04: you can change this parameter into int value
-  final int restaurantId;
+  final String restaurantId;
 
   const DetailScreen({
     super.key,
@@ -27,6 +27,7 @@ class _DetailScreenState extends State<DetailScreen> {
   // todo-04-detail-06: create a local variable for late tourism and Future
   final Completer<Restaurant> _completerRestaurant = Completer<Restaurant>();
   late Future<RestaurantDetailResponse> _futureRestaurantDetail;
+  bool _isCompleterCompleted = false;
 
   // todo-04-detail-07: initialize a Future in initState
   @override
@@ -59,29 +60,43 @@ class _DetailScreenState extends State<DetailScreen> {
       ),
       // todo-04-detail-08: to make it easy, create a new widget below
       // todo-04-detail-09: create a FutureBuilder
-      body: FutureBuilder(
-        future: _futureRestaurantDetail,
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
-            case ConnectionState.done:
-              // todo-04-detail-10: define a widget base on error or has data
-              if (snapshot.hasError) {
-                return Center(
-                  child: Text(snapshot.error.toString()),
-                );
-              }
-              final restaurantData = snapshot.data!.place;
-              _completerRestaurant.complete(restaurantData);
-              return BodyOfDetailScreenWidget(restaurant: restaurantData);
-            default:
-              return const SizedBox();
-          }
-        },
-      ),
+      body: FutureBuilder<RestaurantDetailResponse>(
+  future: _futureRestaurantDetail,
+  builder: (context, snapshot) {
+    switch (snapshot.connectionState) {
+      case ConnectionState.waiting:
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      case ConnectionState.done:
+        if (snapshot.hasError) {
+          return Center(
+            child: Text(snapshot.error.toString()),
+          );
+        }
+
+        if (!snapshot.hasData) {
+          return const Center(
+            child: Text('Data restoran tidak ditemukan'),
+          );
+        }
+
+        final restaurantData = snapshot.data!.restaurant;
+
+        if (!_isCompleterCompleted) {
+          _completerRestaurant.complete(restaurantData);
+          _isCompleterCompleted = true;
+        }
+
+        return BodyOfDetailScreenWidget(
+          restaurant: restaurantData,
+        );
+      default:
+        return const SizedBox();
+    }
+  },
+),
+
     );
   }
 }

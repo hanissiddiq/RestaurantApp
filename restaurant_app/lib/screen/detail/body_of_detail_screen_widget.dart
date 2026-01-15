@@ -17,9 +17,12 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
         child: Column(
           children: [
             Image.network(
-              restaurant.image,
-              fit: BoxFit.cover,
+              'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
             ),
+            // Image.network(
+            //   restaurant.pictureId,
+            //   fit: BoxFit.cover,
+            // ),
             const SizedBox.square(dimension: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +37,7 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                         style: Theme.of(context).textTheme.headlineLarge,
                       ),
                       Text(
-                        restaurant.address,
+                        restaurant.city,
                         style: Theme.of(context)
                             .textTheme
                             .labelLarge
@@ -51,7 +54,7 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                     ),
                     const SizedBox.square(dimension: 4),
                     Text(
-                      restaurant.like.toString(),
+                      restaurant.rating.toString(),
                       style: Theme.of(context).textTheme.bodyLarge,
                     )
                   ],

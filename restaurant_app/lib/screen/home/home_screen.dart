@@ -48,7 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 );
               }
 
-              final listOfRestaurant = snapshot.data!.places;
+              final listOfRestaurant = snapshot.data!.restaurants;
               return ListView.builder(
                 itemCount: listOfRestaurant.length,
                 itemBuilder: (context, index) {

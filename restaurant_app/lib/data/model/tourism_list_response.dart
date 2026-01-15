@@ -1,6 +1,6 @@
 // todo-01-setup-02: create a api response
 import 'package:restaurant_app/data/model/restaurant.dart';
-import 'package:restaurant_app/data/model/tourism.dart';
+// import 'package:restaurant_app/data/model/tourism.dart';
 
 class RestaurantListResponse {
   final bool error;

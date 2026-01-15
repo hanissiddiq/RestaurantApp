@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
         NavigationRoute.mainRoute.name: (context) => const MainScreen(),
         // todo-04-detail-12: dont forget to change the variable
         NavigationRoute.detailRoute.name: (context) => DetailScreen(
-              restaurantId: ModalRoute.of(context)?.settings.arguments as int,
+              restaurantId: ModalRoute.of(context)?.settings.arguments as String,
             ),
       },
     );
