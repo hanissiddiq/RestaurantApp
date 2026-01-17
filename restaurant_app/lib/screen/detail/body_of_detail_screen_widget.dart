@@ -19,10 +19,6 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
             Image.network(
               'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
             ),
-            // Image.network(
-            //   restaurant.pictureId,
-            //   fit: BoxFit.cover,
-            // ),
             const SizedBox.square(dimension: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,9 +62,64 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
               restaurant.description,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
+            const SizedBox.square(dimension: 16),
+            // Foods Section
+            _buildMenuSection(
+              context,
+              'Foods',
+              restaurant.menus?.foods ?? [],
+            ),
+            const SizedBox.square(dimension: 16),
+            // Drinks Section
+            _buildMenuSection(
+              context,
+              'Drinks',
+              restaurant.menus?.drinks ?? [],
+            ),
+            const SizedBox.square(dimension: 16),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildMenuSection(
+    BuildContext context,
+    String title,
+    List<dynamic> items,
+  ) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headlineSmall,
+        ),
+        const SizedBox.square(dimension: 8),
+        SizedBox(
+          height: 100,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: const EdgeInsets.only(right: 12),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Text(
+                    items[index].name,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
     );
   }
 }

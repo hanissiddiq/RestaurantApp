@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/detail/bookmark_list_provider.dart';
 import 'package:restaurant_app/screen/home/food_card_widget.dart';
-import 'package:restaurant_app/screen/home/tourism_card_widget.dart';
+
 import 'package:restaurant_app/static/navigation_route.dart';
 
 class BookmarkScreen extends StatelessWidget {

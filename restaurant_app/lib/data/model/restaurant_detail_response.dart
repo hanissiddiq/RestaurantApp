@@ -1,5 +1,5 @@
 // todo-04-detail-01: create a class for api response
-import 'package:restaurant_app/data/model/tourism.dart';
+
 import 'package:restaurant_app/data/model/restaurant.dart';
 
 class RestaurantDetailResponse {
