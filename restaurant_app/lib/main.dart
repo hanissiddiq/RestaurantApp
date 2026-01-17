@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Restaurant App',
-      theme: RestaurantTheme.darkTheme,
+      theme: RestaurantTheme.lightTheme,
+      
       darkTheme: RestaurantTheme.darkTheme,
       themeMode: ThemeMode.system,
       initialRoute: NavigationRoute.mainRoute.name,

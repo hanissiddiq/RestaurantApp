@@ -1,5 +1,6 @@
 import 'package:restaurant_app/data/model/category.dart';
 import 'package:restaurant_app/data/model/menus.dart';
+import 'package:restaurant_app/data/model/customer_review.dart';
 
 class Restaurant {
   final String id;
@@ -9,6 +10,8 @@ class Restaurant {
   final String city;
   final double rating;
   final Menus? menus;
+  final String? address;
+  final List<CustomerReview> customerReviews;
 
   Restaurant({
     required this.id,
@@ -18,6 +21,8 @@ class Restaurant {
     required this.city,
     required this.rating,
     this.menus,
+    this.address,
+    this.customerReviews = const [],
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
@@ -27,8 +32,10 @@ class Restaurant {
       description: json["description"],
       pictureId: json["pictureId"],
       city: json["city"],
+      address: json["address"],
       rating: json["rating"]?.toDouble() ?? 0.0,
       menus: json["menus"] != null ? Menus.fromJson(json["menus"]) : null,
+      
     );
   }
 }

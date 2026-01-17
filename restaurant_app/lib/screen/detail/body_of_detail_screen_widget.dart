@@ -39,6 +39,19 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                             .labelLarge
                             ?.copyWith(fontWeight: FontWeight.w400),
                       ),
+                      if (restaurant.address != null)
+                        Row(
+                          children: [
+                            const Icon(Icons.location_on, size: 18),
+                            const SizedBox(width: 4),
+                            Expanded(
+                              child: Text(
+                                restaurant.address!,
+                                style: Theme.of(context).textTheme.bodyMedium,
+                              ),
+                            ),
+                          ],
+                        ),
                     ],
                   ),
                 ),
@@ -77,6 +90,29 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
               restaurant.menus?.drinks ?? [],
             ),
             const SizedBox.square(dimension: 16),
+            const SizedBox(height: 24),
+            Text(
+              'Customer Reviews',
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            const SizedBox(height: 8),
+
+            restaurant.customerReviews.isEmpty
+                ? const Text('Belum ada review')
+                : Column(
+                    children: restaurant.customerReviews.map((review) {
+                      return Card(
+                        child: ListTile(
+                          title: Text(review.name),
+                          subtitle: Text(review.review),
+                          trailing: Text(
+                            review.date,
+                            style: const TextStyle(fontSize: 12),
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
           ],
         ),
       ),
