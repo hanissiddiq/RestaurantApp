@@ -194,6 +194,14 @@ Berikut adalah **README.md** yang lengkap dan rapi untuk aplikasi **RestaurantAp
 
 ---
 
+---
+## Preview Apps
+<img width="498" height="1013" alt="image" src="https://github.com/user-attachments/assets/a451b0bc-260b-4989-92e0-d1a912e2a526" />
+<img width="487" height="1019" alt="image" src="https://github.com/user-attachments/assets/a7feb6db-b64f-48c7-b0d7-4723bf19dc6c" />
+
+
+---
+
 ## 📌 Catatan
 
 * Aplikasi membutuhkan koneksi internet untuk mengakses API
