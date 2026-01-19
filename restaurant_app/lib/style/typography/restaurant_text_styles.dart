@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 class RestaurantTextStyles {
   static const TextStyle _commonStyle = TextStyle(
-    fontFamily: 'Roboto',
+    fontFamily: 'Arimo',
   );
 
   /// displayLarge Text Style

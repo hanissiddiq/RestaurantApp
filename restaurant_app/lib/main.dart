@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/api/api_services.dart';
 import 'package:restaurant_app/provider/detail/bookmark_list_provider.dart';
 import 'package:restaurant_app/provider/main/index_nav_provider.dart';
+import 'package:restaurant_app/provider/restaurant_list_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen.dart';
 import 'package:restaurant_app/screen/main/main_screen.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
@@ -11,11 +13,12 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => IndexNavProvider()),
+        ChangeNotifierProvider(create: (_) => BookmarkListProvider()),
         ChangeNotifierProvider(
-          create: (context) => IndexNavProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => BookmarkListProvider(),
+          create: (_) => RestaurantListProvider(
+            apiService: ApiServices(),
+          ),
         ),
       ],
       child: const MyApp(),
@@ -31,15 +34,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Restaurant App',
       theme: RestaurantTheme.lightTheme,
-      
       darkTheme: RestaurantTheme.darkTheme,
       themeMode: ThemeMode.system,
       initialRoute: NavigationRoute.mainRoute.name,
       routes: {
         NavigationRoute.mainRoute.name: (context) => const MainScreen(),
-        // todo-04-detail-12: dont forget to change the variable
         NavigationRoute.detailRoute.name: (context) => DetailScreen(
-              restaurantId: ModalRoute.of(context)?.settings.arguments as String,
+              restaurantId: ModalRoute.of(context)?.settings.arguments as String ,
             ),
       },
     );
