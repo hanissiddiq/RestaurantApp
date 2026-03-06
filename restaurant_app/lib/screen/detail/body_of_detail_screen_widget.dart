@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/screen/detail/bookmark_icon_widget.dart';
 
 class BodyOfDetailScreenWidget extends StatelessWidget {
   const BodyOfDetailScreenWidget({
@@ -55,19 +56,19 @@ class BodyOfDetailScreenWidget extends StatelessWidget {
                     ],
                   ),
                 ),
-                Row(
+                SizedBox(
+                  width: 60,
+                  child: BookmarkIconWidget(restaurant: restaurant),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(
-                      Icons.favorite,
-                      color: Colors.pink,
-                    ),
-                    const SizedBox.square(dimension: 4),
                     Text(
                       restaurant.rating.toString(),
                       style: Theme.of(context).textTheme.bodyLarge,
                     )
                   ],
-                ),
+                )
               ],
             ),
             const SizedBox.square(dimension: 16),

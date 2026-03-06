@@ -6,11 +6,11 @@ import 'package:restaurant_app/utils/result_state.dart';
 class RestaurantListProvider extends ChangeNotifier {
   final ApiServices apiService;
 
-  RestaurantListProvider({required this.apiService}) {
+  RestaurantListProvider(this.apiService) {
     fetchRestaurantList();
   }
 
-  late ResultState _state;
+  ResultState _state = ResultState.loading;
   ResultState get state => _state;
 
   List<Restaurant> _restaurants = [];

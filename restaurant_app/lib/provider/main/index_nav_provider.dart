@@ -1,12 +1,12 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class IndexNavProvider extends ChangeNotifier {
-  int _indexBottomNavBar = 0;
+  int _index = 0;
 
-  int get indexBottomNavBar => _indexBottomNavBar;
+  int get index => _index;
 
-  set setIndextBottomNavBar(int value) {
-    _indexBottomNavBar = value;
+  void setIndex(int value) {
+    _index = value;
     notifyListeners();
   }
 }

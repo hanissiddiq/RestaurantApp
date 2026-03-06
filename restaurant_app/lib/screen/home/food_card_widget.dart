@@ -71,8 +71,8 @@ class RestaurantCard extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(
-                        Icons.favorite,
-                        color: Colors.pink,
+                        Icons.star,
+                        color: Colors.amber,
                       ),
                       const SizedBox.square(dimension: 4),
                       Expanded(

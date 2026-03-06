@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/detail/bookmark_list_provider.dart';
-import 'package:restaurant_app/screen/home/food_card_widget.dart';
-
-import 'package:restaurant_app/static/navigation_route.dart';
 
 class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({super.key});
@@ -16,26 +13,35 @@ class BookmarkScreen extends StatelessWidget {
       ),
       body: Consumer<BookmarkListProvider>(
         builder: (context, value, child) {
-          final bookmarkList = value.bookmarkList;
-          return switch (bookmarkList.isNotEmpty) {
+          final favorites = value.bookmarkList;
+          return switch (favorites.isNotEmpty) {
             true => ListView.builder(
-                itemCount: bookmarkList.length,
-                itemBuilder: (context, index) {
-                  final restaurant = bookmarkList[index];
+              itemCount: favorites.length,
+              itemBuilder: (context, index) {
+                final restaurant = favorites[index];
 
-                  return RestaurantCard(
-                    restaurant: restaurant,
+                return Card(
+                  child: ListTile(
+                    leading: Image.network(
+                      "https://restaurant-api.dicoding.dev/images/small/${restaurant.pictureId}",
+                      width: 60,
+                      fit: BoxFit.cover,
+                    ),
+                    title: Text(restaurant.name),
+                    subtitle: Text(
+                      "${restaurant.city} • ⭐ ${restaurant.rating}"
+                    ),
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        NavigationRoute.detailRoute.name,
-                        // todo-04-detail-14: dont forget to change the value too
+                        "/detail",
                         arguments: restaurant.id,
                       );
                     },
-                  );
-                },
-              ),
+                  ),
+                );
+              },
+            ),
             _ => const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

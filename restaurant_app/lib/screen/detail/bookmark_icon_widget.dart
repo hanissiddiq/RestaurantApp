@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:restaurant_app/provider/detail/bookmark_list_provider.dart';
 import 'package:restaurant_app/provider/detail/bookmark_icon_provider.dart';
+import 'package:restaurant_app/provider/favorite_provider.dart';
 
 class BookmarkIconWidget extends StatefulWidget {
   final Restaurant restaurant;
@@ -19,13 +20,12 @@ class BookmarkIconWidget extends StatefulWidget {
 class _BookmarkIconWidgetState extends State<BookmarkIconWidget> {
   @override
   void initState() {
-    final bookmarkListProvider = context.read<BookmarkListProvider>();
     final bookmarkIconProvider = context.read<BookmarkIconProvider>();
+    final favoriteProvider = context.read<FavoriteProvider>();
 
-    Future.microtask(() {
-      final restaurantInList =
-          bookmarkListProvider.checkItemBookmark(widget.restaurant);
-      bookmarkIconProvider.isBookmarked = restaurantInList;
+    Future.microtask(() async {
+      final isFav = await bookmarkIconProvider.databaseHelper.isFavorite(widget.restaurant.id);
+      bookmarkIconProvider.isBookmarked = isFav;
     });
 
     super.initState();
@@ -33,24 +33,31 @@ class _BookmarkIconWidgetState extends State<BookmarkIconWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        final bookmarkListProvider = context.read<BookmarkListProvider>();
-        final bookmarkIconProvider = context.read<BookmarkIconProvider>();
-        final isBookmarked = bookmarkIconProvider.isBookmarked;
+    return Consumer3<BookmarkIconProvider, BookmarkListProvider, FavoriteProvider>(
+      builder: (context, iconProvider, listProvider, favoriteProvider, child) {
+        final isFavorite = iconProvider.isBookmarked;
 
-        if (isBookmarked) {
-          bookmarkListProvider.removeBookmark(widget.restaurant);
-        } else {
-          bookmarkListProvider.addBookmark(widget.restaurant);
-        }
-        bookmarkIconProvider.isBookmarked = !isBookmarked;
+        return IconButton(
+          icon: Icon(
+            isFavorite ? Icons.favorite : Icons.favorite_border,
+            color: Colors.red,
+          ),
+          onPressed: () async {
+            final newFavoriteState = !isFavorite;
+            
+            await iconProvider.toggleBookmark(widget.restaurant);
+            
+            if (newFavoriteState) {
+              listProvider.addBookmark(widget.restaurant);
+            } else {
+              listProvider.removeBookmark(widget.restaurant);
+            }
+            
+            await favoriteProvider.loadFavorites();
+            iconProvider.isBookmarked = newFavoriteState;
+          },
+        );
       },
-      icon: Icon(
-        context.watch<BookmarkIconProvider>().isBookmarked
-            ? Icons.bookmark
-            : Icons.bookmark_outline,
-      ),
     );
   }
 }

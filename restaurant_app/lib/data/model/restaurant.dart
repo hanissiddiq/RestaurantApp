@@ -2,6 +2,7 @@ import 'package:restaurant_app/data/model/category.dart';
 import 'package:restaurant_app/data/model/menus.dart';
 import 'package:restaurant_app/data/model/customer_review.dart';
 
+
 class Restaurant {
   final String id;
   final String name;
@@ -27,15 +28,32 @@ class Restaurant {
 
   factory Restaurant.fromJson(Map<String, dynamic> json) {
     return Restaurant(
-      id: json["id"],
-      name: json["name"],
-      description: json["description"],
-      pictureId: json["pictureId"],
-      city: json["city"],
+      id: json["id"] ?? '',
+      name: json["name"] ?? '',
+      description: json["description"] ?? '',
+      pictureId: json["pictureId"] ?? '',
+      city: json["city"] ?? '',
       address: json["address"],
-      rating: json["rating"]?.toDouble() ?? 0.0,
+      rating: (json["rating"] as num?)?.toDouble() ?? 0.0,
       menus: json["menus"] != null ? Menus.fromJson(json["menus"]) : null,
-      
     );
   }
+
+  
+
+  /// ✅ KHUSUS SQLITE & SHARED_PREFERENCES
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'pictureId': pictureId,
+      'city': city,
+      'address': address,
+      'rating': rating,
+    };
+  }
+
+
+
 }
