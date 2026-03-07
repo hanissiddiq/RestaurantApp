@@ -3,6 +3,7 @@
 Berikut adalah **README.md** yang lengkap dan rapi untuk aplikasi **RestaurantApp** menggunakan **Flutter** dan **Dicoding Restaurant API**, disesuaikan dengan seluruh kriteria submission yang Anda sebutkan.
 
 ---
+<img width="1280" height="720" alt="RestaurantApp" src="https://github.com/user-attachments/assets/f4074501-919d-4ff6-9ef0-37f0cc89b592" />
 
 
 ## 📱 Fitur Aplikasi
